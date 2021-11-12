@@ -13,13 +13,33 @@
     <q-separator/>
     <p class="text-body1">Cuerpo de texto 1</p>
     <p class="text-body2">Cuerpo de texto 2</p>
+
+    <q-btn color="secondary" 
+           :label="sideMenuOpen? 'Cerrar menú lateral' : 'Abrir menú lateral'" 
+           class="q-mt-md"
+           @click="toggleSideMenu"
+    />
+
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
+
+import useUI from '../composables/useUI'
 
 export default defineComponent({
-  name: 'Typography'
+  name: 'Typography',
+
+  setup() {
+
+    const {sideMenuOpen, toggleSideMenu} = useUI()
+
+    return {
+      sideMenuOpen, 
+      toggleSideMenu
+    }
+
+  }
 })
 </script>

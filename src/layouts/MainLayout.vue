@@ -8,19 +8,19 @@
           round
           icon="las la-hamburger"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
+          @click="toggleSideMenu"
         />
 
         <q-toolbar-title>
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <!-- <div>Quasar v{{ $q.version }}</div> -->
       </q-toolbar>
     </q-header>
 
     <q-drawer
-      v-model="leftDrawerOpen"
+      v-model="sideMenuOpen"
       show-if-above
       bordered
     >
@@ -32,7 +32,7 @@
         </q-item-label>
 
         <EssentialLink
-          v-for="link in essentialLinks"
+          v-for="link in linksList"
           :key="link.title"
           v-bind="link"
         />
@@ -46,30 +46,11 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
+
 import EssentialLink from 'components/EssentialLink.vue'
-
-const linksList = [
-  {
-    title: 'Typography',
-    caption: 'Tipos de letras en quasar',
-    icon: 'las la-keyboard',
-    link: 'typography'
-  },
-  {
-    title: 'Flex layout',
-    caption: 'Estilos con flex',
-    icon: 'las la-layer-group',
-    link: 'flex'
-  },
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'las la-graduation-cap',
-    link: 'https://quasar.dev'
-  },
-];
-
-import { defineComponent, ref } from 'vue'
+import { linksList } from '../router/link-list'
+import useUI from '../composables/useUI'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -79,14 +60,15 @@ export default defineComponent({
   },
 
   setup () {
-    const leftDrawerOpen = ref(false)
+    
+    const {sideMenuOpen, toggleSideMenu} = useUI()
 
     return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      
+      linksList,
+      sideMenuOpen, 
+      toggleSideMenu
+      
     }
   }
 })

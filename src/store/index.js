@@ -3,6 +3,8 @@ import { createStore } from 'vuex'
 
 // import example from './module-example'
 
+import ui from './ui'
+
 /*
  * If not building with SSR mode, you can
  * directly export the Store instantiation;
@@ -15,7 +17,7 @@ import { createStore } from 'vuex'
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
-      // example
+      ui
     },
 
     // enable strict mode (adds overhead!)
